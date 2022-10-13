@@ -1,4 +1,4 @@
-const { Post, User, Comment } = require('../models');
+const { Post } = require('../models');
 
 const router = require('express').Router();
 
@@ -14,20 +14,7 @@ router.get('/', withAuth, async (req, res) => {
             'id',
             'title',
             'content',
-        ],
-        include: [{
-            model: Comment,
-            attributes: ['id', 'comment_text', 'post_id', 'user_id'],
-            include: {
-                model: User,
-                attributes: ['username']
-            }
-        },
-        {
-            model: User,
-            attributes: ['username']
-        }
-    ]
+        ]
     });
     const posts = postData.map((post) =>
         post.get({ plain: true })
@@ -77,7 +64,7 @@ router.get('/edit/:id', withAuth, async (req, res) => {
 });
 
 router.get('/new', (req, res) => {
-    res.render('add-post')
+    res.render('create-post')
 });
 
 module.exports = router;

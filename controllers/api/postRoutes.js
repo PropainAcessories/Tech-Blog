@@ -61,7 +61,7 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-router.post('/', withAuth, async (req, res) => {
+router.post('/create', withAuth, async (req, res) => {
     try {
         const postData = await Post.create({
             title: req.body.title,
@@ -72,6 +72,7 @@ router.post('/', withAuth, async (req, res) => {
         res.status(200).json(postData);
     } catch (err) {
         res.status(500).json(err);
+        console.log(err);
     }
 });
 

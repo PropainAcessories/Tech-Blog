@@ -3,7 +3,7 @@
         <div class="card-header">
             <h2>{{post.title}}</h2>
             <div>
-                Posted by: {{post.User.username}} on {{format_date post.post_info}}
+                Posted by: {{post.User.username}} on {{format_date}}
             </div>
         </div>
         <div class="card-body">
@@ -22,7 +22,7 @@
                     {{body}}
                 </p>
                 <p>
-                    &mdash; {{User.username}}, {{format_date post_info}}
+                    &mdash; {{User.username}}, {{format_date}}
                 </p>
             </div>
             {{/each}}

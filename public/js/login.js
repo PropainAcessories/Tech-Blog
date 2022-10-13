@@ -14,7 +14,7 @@ const loginHandler = async (event) => {
         return;
     }
     
-    const response = await fetch('/api/users/login', {
+    const response = await fetch('/api/users/login/', {
         method: 'POST',
         body: JSON.stringify({
             username,
@@ -24,7 +24,7 @@ const loginHandler = async (event) => {
     });
 
     if (response.ok) {
-        document.location.replace('/');
+        document.location.replace('/forum');
     } else {
         alert(response.statusText);
     }
