@@ -10,16 +10,25 @@
 
 <body class="">
     <nav class="navbar">
-
+      <h1 class="">Tech Blog</h1>
+      {{#if loggedIn}}
+      <a href="/" class="navbar-item">Home</a>
+      <a href="/forum" class="navbar-item">Dashboard</a>
+      <a href="/forum/create" class="navbar-item">New Post</a>
+      <button id="logout" class="button">Log Out</button>
+      {{else}}
+      <a href="/" class="navbar-item">Home</a>
+      <a href="/login" class="button">Login</a>
+      <a href="/signup" class="button">Create Account</a>
+      {{/if}}
     </nav>
 
     <main class="">
-        <h1 class="">Tech Blog</h1>
+
         {{{ body }}}
     </main>
-
     {{#if loggedIn}}
-    <script src="/public/js/logout.js"></script>
+    <script src="/js/logout.js"></script>
     {{/if}}
 </body>
 

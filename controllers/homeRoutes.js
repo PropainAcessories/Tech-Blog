@@ -4,34 +4,14 @@ const router = require('express').Router();
 
 router.get('/', async (req, res) => {
     try {
-        const postData = await Post.findall({
-        attributes: [
-            'id',
-            'title',
-            'content',
-            'post_info'
-        ],
-        include: [{
-            model: Comment,
-            attributes: ['id', 'comment_text', 'post_id', 'post_info'],
-            include: {
-                model: User,
-                attributes: ['username']
-            },
-        },
-        {
-            model: User,
-            attributes: ['username']
-        }
-        ]
+        const postData = await Post.findAll({
+            include: [User],
     });
 
     const posts = postData.map((post) => post.get({ plain: true}));
 
     res.render('homepage', {
         posts,
-        logged_in: req.session.logged_in,
-        username: req.session.username
     });
 
     } catch (err) {
@@ -39,7 +19,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('login', (req, res) => {
+router.get('/login', (req, res) => {
     try {
          if (req.session.logged_in) {
             res.redirect('/');
@@ -51,7 +31,11 @@ router.get('login', (req, res) => {
     }
 });
 
-router.get('./signup', (req,res) => {
+router.get('/signup', (req,res) => {
+    if (req.session.logged_in) {
+        res.redirect('/');
+        return;
+    }
     res.render('signup');
 });
 
@@ -65,11 +49,10 @@ router.get('/post/:id', async (req, res) => {
             'id',
             'content',
             'title',
-            'post_info'
         ],
         include: [{
             model: Comment,
-            attributes: ['id', 'comment_text', 'post_id', 'user_id', 'post_info'],
+            attributes: ['id', 'comment_text', 'post_id', 'user_id'],
             include: {
                 model: User,
                 attributes: ['username']

@@ -1,6 +1,6 @@
 const { Post, User, Comment } = require('../../models');
-
 const router = require('express').Router();
+const bcrypt = require('bcrypt');
 
 
 router.get('/', async (req, res) => {
@@ -24,11 +24,11 @@ router.get('/:id', async (req, res) => {
             },
             include: [{
                 model: Post,
-                attributes: ['id', 'title', 'content', 'post_info']
+                attributes: ['id', 'title', 'content']
             },
             {
                 model: Comment,
-                attributes: ['id', 'comment_text', 'post_info'],
+                attributes: ['id', 'comment_text'],
                 include: {
                     model: Post,
                     attributes: ['title'],
@@ -63,7 +63,8 @@ router.post('/', async (req, res) => {
             res.status(200).json(userData);
         });
     } catch (err) {
-        res.status(400).json(err);
+        res.status(500).json(err);
+        console.log(err);
     }
 });
 
@@ -80,7 +81,7 @@ router.post('/login', async (req, res) => {
             return;
         }
 
-        const validPassword = await userData.checkPassword(req.body.password);
+        const validPassword = await bcrypt.compareSync(req.body.password, userData.password);
 
         if (!validPassword) {
             res.status(400).json({ message: 'Incorrect login.' });
@@ -91,11 +92,11 @@ router.post('/login', async (req, res) => {
             req.session.user_id = userData.id;
             req.session.loggedIn = true;
 
-            res.json({ user: userData, message: 'Welcome.' });
+            res.status(200).json({ user: userData, message: 'Welcome.' });
         });
 
     } catch (err) {
-        res.status(400).json(err);
+        res.status(500).json(err);
     }
 });
 

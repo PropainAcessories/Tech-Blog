@@ -14,11 +14,10 @@ router.get('/', withAuth, async (req, res) => {
             'id',
             'title',
             'content',
-            'post_info'
         ],
         include: [{
             model: Comment,
-            attributes: ['id', 'comment_text', 'post_id', 'user_id', 'post_info'],
+            attributes: ['id', 'comment_text', 'post_id', 'user_id'],
             include: {
                 model: User,
                 attributes: ['username']
@@ -38,6 +37,7 @@ router.get('/', withAuth, async (req, res) => {
 
     } catch (err) {
         res.status(500).json(err);
+        console.log(err);
     }
 });
 
@@ -47,14 +47,14 @@ router.get('/edit/:id', withAuth, async (req, res) => {
         where: {
             id: req.params.id
         },
-        attributes: ['id', 'title', 'content', 'post_info'],
+        attributes: ['id', 'title', 'content'],
         include: [{
             model: User,
             attributes: ['username']
         },
         {
             model: Comment,
-            attributes: ['id', 'comment_text', 'post_id', 'user_id', 'post_info'],
+            attributes: ['id', 'comment_text', 'post_id', 'user_id'],
             include: {
                 model: User,
                 attributes: ['username']
