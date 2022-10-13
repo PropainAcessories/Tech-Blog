@@ -39,7 +39,7 @@ router.get('/signup', (req,res) => {
     res.render('signup');
 });
 
-router.get('/post/:id', async (req, res) => {
+router.get('/posts/:id', async (req, res) => {
     try {
         const postData = await Post.findOne({
         where: {

@@ -24,7 +24,7 @@ const loginHandler = async (event) => {
     });
 
     if (response.ok) {
-        document.location.replace('/forum');
+        document.location.replace('/dashboard');
     } else {
         alert(response.statusText);
     }

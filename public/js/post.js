@@ -4,15 +4,13 @@ const newPostHandler = async (event) => {
     const title = document.querySelector("input[name='post-title']").value;
     const content = document.querySelector("textarea[name='post-content'").value;
 
-    const token = localStorage.getItem('token');
-
-    const response = await fetch('/api/posts/create', {
+    const response = await fetch('/api/posts', {
         method: 'POST',
         body: JSON.stringify({
             title,
             content
         }),
-        headers: {'Content-Type': 'application/json', authorization: `Bearer ${token}`}
+        headers: {'Content-Type': 'application/json'}
     });
 
     if (response.ok) {

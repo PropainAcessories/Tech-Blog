@@ -1,10 +1,10 @@
-const { Post } = require('../models');
+const { Post, User, Comment } = require('../models');
 
 const router = require('express').Router();
 
 const withAuth = require('../utils/auth');
 
-router.get('/', withAuth, async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const postData = await Post.findAll({
         where: {
@@ -14,13 +14,26 @@ router.get('/', withAuth, async (req, res) => {
             'id',
             'title',
             'content',
-        ]
+        ],
+        include: [{
+            model: Comment,
+            attributes: ['id', 'comment_text', 'post_id', 'user_id'],
+            include: {
+                model: User,
+                attributes: ['username']
+            }
+        },
+        {
+            model: User,
+            attributes: ['username']
+        }
+    ]
     });
     const posts = postData.map((post) =>
         post.get({ plain: true })
     );
 
-    res.render('forum', { posts, loggedIn: true, username: req.session.username });
+    res.render('dashboard', { posts, loggedIn: true, username: req.session.username });
 
     } catch (err) {
         res.status(500).json(err);

@@ -1,17 +1,8 @@
-<div class="forum">
-    {{#each forum}}
-    <article class="card">
-        <div class="card-header">
-            <h3>
-                <a href="/post/{{id}}">{{title}}</a>
-            </h3>
-        </div>
-        <div>
-            Posted by {{User.username}} on {{format_date post_info}}
-        </div>
-        <div class="card-body">
-            {{body}}
-        </div>
-    </article>
-    {{/each}}
+
+{{#each posts as |post|}}
+
+{{> post-info post }}
 </div>
+{{else}}
+<h6>No posts</h6>
+{{/each}}
