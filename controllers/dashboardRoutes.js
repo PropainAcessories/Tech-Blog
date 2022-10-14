@@ -4,11 +4,11 @@ const router = require('express').Router();
 
 const withAuth = require('../utils/auth');
 
-router.get('/', async (req, res) => {
+router.get('/posts', async (req, res) => {
     try {
         const postData = await Post.findAll({
         where: {
-            user_id: req.session.user_id
+            id: req.session.user_id
         },
         attributes: [
             'id',
@@ -33,7 +33,7 @@ router.get('/', async (req, res) => {
         post.get({ plain: true })
     );
 
-    res.render('dashboard', { posts, loggedIn: true, username: req.session.username });
+    res.render('dashboard', { posts, loggedIn: true,});
 
     } catch (err) {
         res.status(500).json(err);
@@ -77,7 +77,7 @@ router.get('/edit/:id', withAuth, async (req, res) => {
 });
 
 router.get('/new', (req, res) => {
-    res.render('create-post')
+    res.render('create-post', {loggedIn: true})
 });
 
 module.exports = router;

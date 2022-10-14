@@ -40,7 +40,7 @@ router.get('/:id', async (req, res) => {
         where: {
             id: req.params.id
         },
-        attributes: ['id', 'content', 'title'],
+        attributes: ['id', 'content', 'title', 'user_id'],
         include: [{
             model: User,
             attributes: ['username']
@@ -113,7 +113,7 @@ router.delete('/:id', withAuth, async (req, res) => {
         })
 
         if (!postData) {
-            res.status(404).json({ message: 'No post found try again.' });
+            res.status(404).json(err);
             return;
         }
 

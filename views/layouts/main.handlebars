@@ -5,28 +5,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tech Forum</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.0/css/bulma.min.css">
   <link rel="stylesheet" href="/css/style.css">
 </head>
 
-<body class="">
-    <nav class="navbar">
+<body class="wrapper">
+    <nav class="navbar text-black px-3 py-2 text-weight-bold">
       <h1 class="">Tech Blog</h1>
       {{#if loggedIn}}
-      <a href="/" class="navbar-item">Home</a>
-      <a href="/dashboard" class="navbar-item">Dashboard</a>
-      <a href="/dashboard/new" class="navbar-item">New Post</a>
-      <button id="logout" class="button">Log Out</button>
+      <a href="/" class="navbar-item is-hoverable pt-1">Home</a>
+      <a href="/dashboard/new" class="navbar-item bg-hoverable pt-1">New Post</a>
+      <button id="logout" class="button is-primary">Log Out</button>
       {{else}}
-      <a href="/" class="navbar-item">Home</a>
-      <a href="/login" class="button">Login</a>
-      <a href="/signup" class="button">Create Account</a>
+      <a href="/" class="navbar-item is-hoverable pt-1">Home</a>
+      <a href="/login" class="button is-primary">Login</a>
+      <a href="/signup" class="button is-primary">Create Account</a>
       {{/if}}
     </nav>
 
-    <main class="">
-
+    <main>
         {{{ body }}}
     </main>
+
+
+
     {{#if loggedIn}}
     <script src="/js/logout.js"></script>
     {{/if}}

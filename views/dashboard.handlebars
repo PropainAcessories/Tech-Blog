@@ -1,17 +1,18 @@
+<div class="mb-5">
+    <a href="dashboard/new"><button id="create-post" class="button">Create Post</button></a>
 
-    <nav class="navbar">
-        <a href="/">Home</a>
-        <a href="#" id="logout-link">logout</a>
-    </nav>
+    <h2 class="title pb-4">Your posts</h2>
+    {{#if posts.length}}
+</div>
 
-    <main class="col-auto">
-    </main>
+{{#each posts as |post|}}
+{{post-info post}}
+<div>
+    <a href="/dashboard/edit/{{post.id}}"><button class="mb-5">Edit-Post</button></a>
+</div>
+{{/each}}
 
-    <footer>
-        <a href="/dashboard/new">New post</a>
-    </footer>
+{{else}}
+<h6> No posts, Be active!</h6>
 
-<script src="/js/logout.js"></script>
-<script src="/js/edit.js"></script>
-<script src="/js/delete.js"></script>
-</html>
+{{/if}}
