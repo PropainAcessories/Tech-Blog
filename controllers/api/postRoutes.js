@@ -7,9 +7,6 @@ const withAuth = require('../../utils/auth');
 router.get('/', async (req, res) => {
     try {
         const postData = await Post.findAll({
-            where: {
-                user_id: req.session.user_id
-            },
             attributes: [
                 'id',
                 'title',
@@ -30,9 +27,10 @@ router.get('/', async (req, res) => {
         ]
         });
 
-        res.status(200).json(postData)
+        res.status(200).json(postData);
     } catch (err) {
-        res.status(500).json(err)
+        res.status(500).json(err);
+        console.log(err);
     }
 })
 
@@ -42,14 +40,14 @@ router.get('/:id', async (req, res) => {
         where: {
             id: req.params.id
         },
-        attributes: ['id', 'content', 'title', 'post_info'],
+        attributes: ['id', 'content', 'title'],
         include: [{
             model: User,
             attributes: ['username']
         },
     {
         model: Comment,
-        attributes: ['id', 'comment_text', 'post_id', 'user_id', 'post_info'],
+        attributes: ['id', 'comment_text', 'post_id', 'user_id'],
         include: {
             model: User,
             attributes: ['username']
@@ -64,6 +62,7 @@ router.get('/:id', async (req, res) => {
         res.status(200).json(postData);
     } catch (err) {
         res.status(500).json(err);
+        console.log(err);
     }
 });
 

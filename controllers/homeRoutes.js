@@ -12,6 +12,7 @@ router.get('/', async (req, res) => {
 
     res.render('homepage', {
         posts,
+        loggedIn: true
     });
 
     } catch (err) {
@@ -21,7 +22,7 @@ router.get('/', async (req, res) => {
 
 router.get('/login', (req, res) => {
     try {
-         if (req.session.logged_in) {
+         if (req.session.loggedIn) {
             res.redirect('/');
             return;
          }
@@ -32,14 +33,14 @@ router.get('/login', (req, res) => {
 });
 
 router.get('/signup', (req,res) => {
-    if (req.session.logged_in) {
+    if (req.session.loggedIn) {
         res.redirect('/');
         return;
     }
     res.render('signup');
 });
 
-router.get('/posts/:id', async (req, res) => {
+router.get('/post/:id', async (req, res) => {
     try {
         const postData = await Post.findOne({
         where: {
@@ -64,8 +65,10 @@ router.get('/posts/:id', async (req, res) => {
     }]
     });
     const post = postData.get({ plain: true });
-    res.render('single-post', { post, logged_in: req.session.logged_in });
-
+    res.render('single-post', {
+         post,
+        loggedIn: true 
+        });
     } catch (err) {
         res.status(500).json(err);
     }

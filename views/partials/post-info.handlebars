@@ -1,1 +1,19 @@
-<di
+<div class="card">
+    <header class="card-header-title">
+        <div class="column">
+            <p class=""></p>
+            <a href="/post/{{id}}" class="">{{title}} </a></p>
+        </div>
+
+        <div class="column">
+            <span class=""></span>
+        </div>
+    </header>
+
+    <div class="card-body">
+        {{content}}
+    </div>
+    <div>
+        <b>{{user.username}}</b>| <a href="/post/{{id}}">| {{format_multiple "comment" comments.length}}</a>
+    </div>
+</div>
