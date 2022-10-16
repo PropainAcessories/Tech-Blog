@@ -1,6 +1,7 @@
 const { Post, User, Comment } = require('../../models');
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
+const withAuth = require('../../utils/auth');
 
 
 router.get('/', async (req, res) => {
@@ -100,7 +101,25 @@ router.post('/login', async (req, res) => {
     }
 });
 
-router.post('/logout', (req, res) => {
+router.delete('/:id', withAuth, async (req, res) => {
+    try {
+        const userData = await User.destroy({
+        where: {
+            id: req.params.id
+        }
+        });
+        if (!userData) {
+            res.status(404).json({ message: 'User not found' });
+            return;
+        }
+        res.status(200).json(userData);
+    } catch (err) {
+        res.status(500).json(err);
+        console.log(err);
+    }
+});
+
+router.post('/logout', withAuth, (req, res) => {
     if (req.session.loggedIn) {
         req.session.destroy(() => {
             res.status(204).end();

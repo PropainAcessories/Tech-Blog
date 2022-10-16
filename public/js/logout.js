@@ -3,7 +3,7 @@ const logout = document.querySelector('#logout');
 const logOut = async (event) => {
     event.preventDefault();
 
-    const response = await fetch('/api/users/end', {
+    const response = await fetch('/api/users/logout', {
         method: 'POST',
         headers: { "Content-Type": "application/json" }
     });
