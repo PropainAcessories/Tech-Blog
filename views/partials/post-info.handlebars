@@ -1,8 +1,8 @@
-<div class="card">
+<div class="card has-background-grey-dark">
     <header class="card-header-title">
         <div class="column">
-            <p class=""></p>
-            <a href="/post/{{id}}" class="">{{title}} </a></p>
+            <p class="has-text-white-bis"></p>
+            <a href="/post/{{id}}" class="has-text-white-bis">{{title}} </a></p>
         </div>
 
         <div class="column">
@@ -10,10 +10,12 @@
         </div>
     </header>
 
-    <div class="card-body">
-        {{content}}
+    <div class="card-content">
+        <div class="content has-text-justified has-text-white-bis">
+            {{content}}
+        </div>
     </div>
     <div>
-        <b>{{user.username}}</b>| <a href="/post/{{id}}"></a>| {{format_multiple "Comment" comments.length}}
+        <b>{{user.username}}</b>| <a href="/post/{{id}}">| {{format_multiple "Comment" comments.length}}</a>
     </div>
 </div>
