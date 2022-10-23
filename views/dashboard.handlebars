@@ -6,7 +6,7 @@
 </div>
 
 {{#each posts as |post|}}
-{{post-info post}}
+{{> post-info post}}
 <div>
     <a href="/dashboard/edit/{{post.id}}"><button class="mb-5">Edit-Post</button></a>
 </div>

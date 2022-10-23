@@ -5,7 +5,19 @@ const router = require('express').Router();
 router.get('/', async (req, res) => {
     try {
         const postData = await Post.findAll({
-            include: [User],
+            include: [
+                {
+                    model: Comment,
+                    include: [
+                        {
+                            model: User,
+                        }
+                    ]
+                },
+                {
+                    model: User,
+                }
+            ],
     });
 
     const posts = postData.map((post) => post.get({ plain: true}));
@@ -53,15 +65,12 @@ router.get('/post/:id', async (req, res) => {
         ],
         include: [{
             model: Comment,
-            attributes: ['id', 'comment_text', 'post_id', 'user_id'],
             include: {
                 model: User,
-                attributes: ['username']
             }
         },
     {
         model: User,
-        attributes: ['username']
     }]
     });
     const post = postData.get({ plain: true });
