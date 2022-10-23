@@ -24,7 +24,7 @@
   ## Implementation
   🐔You can implement it by forking or cloning it. Alternatively visit the deployment. If you fork/clone it:
 
-  🐔Run a terminal in the db folder run ```mysql -u root-p``` then after logging in run ```source schema.sql``` and ```SHOW DATABASES``` to make sure forum_db is added.
+  🐔Run a terminal in the db folder run ```mysql -u root-p``` then after logging in run ```source schema.sql``` and ```SHOW DATABASES;``` to make sure forum_db is added.
 
   🐔 Run ```npm i``` or ```npm install``` to install dependencies.
 
