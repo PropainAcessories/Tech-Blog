@@ -16,6 +16,7 @@
         </div>
     </div>
     <div class="has-text-white-bis">
-        <b>{{user.username}}</b>| <a href="/post/{{id}}">| {{format_multiple "Comment" comments.length}}</a>
+        <b>{{user.username}}</b>| 
+        <a href="/post/{{id}}">| {{format_date}} | {{format_multiple "Comment" comments.length}}</a>
     </div>
 </div>
