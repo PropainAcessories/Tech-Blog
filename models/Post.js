@@ -1,6 +1,7 @@
 
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
+const format_date = require('../utils/helpers');
 
 class Post extends Model {}
 
