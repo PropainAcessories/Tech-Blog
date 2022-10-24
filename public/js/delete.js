@@ -1,9 +1,10 @@
 const deleteHandler = async (event) => {
     event.preventDefault();
 
-    const postId = document.querySelector('#post-id');
+    const postId = document.querySelector('#post-id').innerHTML;
+    console.log(postId);
 
-    const response = await fetch('/api/posts/' + postId.value, {
+    const response = await fetch('/api/post/' + `${postId}`, {
         method: 'DELETE'
     });
 

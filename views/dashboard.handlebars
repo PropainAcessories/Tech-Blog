@@ -1,5 +1,5 @@
 <div class="mb-5">
-    <a href="dashboard/new"><button id="create-post" class="button">Create Post</button></a>
+    <a href="dashboard/new"><button id="create-post" class="button is-success">Create Post</button></a>
 
     <h2 class="title pb-4">Your posts</h2>
     {{#if posts.length}}
@@ -8,7 +8,7 @@
 {{#each posts as |post|}}
 {{> post-info post}}
 <div>
-    <a href="/dashboard/edit/{{post.id}}"><button class="mb-5">Edit-Post</button></a>
+    <a href="/dashboard/edit/{{post.id}}"><button class="button is-link mb-5">Edit-Post</button></a>
 </div>
 {{/each}}
 

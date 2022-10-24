@@ -22,12 +22,6 @@ button {
     border-radius: 4px;
 }
 
-textarea, input {
-    padding: 1%;
-    border-radius: 4px;
-    border: 1px solid #0000;
-}
-
 textarea:focus, input:focus {
     padding: 1%;
     border-radius: 4px;

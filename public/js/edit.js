@@ -2,10 +2,11 @@ const editFormHandler = async (event) => {
     event.preventDefault();
 
     const titleEl = document.querySelector('#post-title');
-    const contentEl = document.querySelector('#post-body');
-    const postId = document.querySelector('#post-id');
+    const contentEl = document.querySelector('#post-content');
+    const postId = document.querySelector('#post-id').innerHTML;
+    console.log(postId);
 
-    const response = await fetch('/api/posts/' + postId.value, {
+    const response = await fetch('/api/post/' + `${postId}`, {
         method: 'PUT',
         body: JSON.stringify({
             title: titleEl.value,
@@ -15,7 +16,7 @@ const editFormHandler = async (event) => {
     });
 
     if (response.ok) {
-        document.location.replace('/');
+        document.location.replace('/dashboard');
     } else {
         alert(response.statusText);
     }
